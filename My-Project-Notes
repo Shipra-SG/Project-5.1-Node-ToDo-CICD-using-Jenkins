@@ -1,0 +1,64 @@
+# 1- Jenkins install and SonarQube as well --> open in the browser
+
+# 2- generate a token on SonarQube and copy it
+--> project name - Node-Todo
+--> token- in the sonarqube-token file
+
+# 3- Jenkins Configuration
+> Install plugins:
+--> SonarQube Scanner
+--> NodeJS
+--> Docker Pipeline
+--> OWASP Dependency-Check
+
+> Jenkins → Manage Jenkins -> tools
+--> add Nodejs - name: node16, version: node 16.x -> save
+
+> Manage Jenkins → Credentials
+--> Click (global) → Add Credentials
+--> Kind: Secret Text
+--> Secret: Paste SonarQube token
+--> ID: sonar-token
+--> Description: SonarQube Token
+Save ✔️
+
+# 4- SonarQube Server Configuration in Jenkins
+Step 1: Manage Jenkins → Configure System
+Scroll down to SonarQube Servers
+
+Step 2: Add SonarQube Server
+--> Click Add SonarQube
+--> Fill details-
+🔹Name: sonar,🔹Server URL: http://<public-ip>:9000
+(agar SonarQube Jenkins wali machine pe hi run ho raha hai)
+🔹Server authentication token: 
+ --> Select: sonar-token (jo abhi add kiya)
+
+--> ✔️ Tick: Environment variables
+--> Save 
+
+# 5- SonarQube Scanner Install (IMPORTANT)
+--> Step 1: Manage Jenkins → Tools
+Scroll to SonarQube Scanner
+
+--> Step 2: Add Scanner
+Name:sonar-scanner
+✔ Install automatically
+
+--> Save ✔️
+
+# 6- OWASP Tool Configuration (MOST IMPORTANT)
+--> Step 1: Go to Manage Jenkins → Tools
+Scroll down until: Dependency-Check installations
+
+--> Step 2: Add Dependency-Check
+Click: Add Dependency-Check
+Fill details: 🔹Name: owasp,🔹Install Automatically: ✔Tick karo
+
+--> Save
+
+# 7- Trivy Setup
+> curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+> trivy --version
+
+# 8- Write Jenkinsfile
