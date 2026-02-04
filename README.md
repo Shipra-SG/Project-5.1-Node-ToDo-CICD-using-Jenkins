@@ -133,6 +133,42 @@ docker-compose up -d
 
 ---
 
+## Challenges Faced & Learnings
+While building this end-to-end Jenkins CI/CD DevSecOps pipeline, I encountered multiple real-world issues. Solving these helped me gain practical troubleshooting and debugging experience similar to production environments.
+
+### 1️⃣ Trivy Installation – Version & 404 Error
+- Issue: Trivy download failed with 404 Not Found when using the latest URL with an older version.
+- Root Cause: GitHub releases were updated, and the referenced version no longer existed under latest.
+- Learning:
+   - Always verify tool versions before downloading
+   - Prefer package managers (apt) or correct release tags
+
+### 2️⃣ Docker Permission Denied in Jenkins
+- Issue: Docker build failed with permission denied while trying to connect to the Docker daemon.
+- Root Cause: Jenkins user did not have permission to access Docker socket.
+- Learning:
+   - Jenkins requires explicit Docker permissions
+   - User must be added to the docker group
+
+### 3️⃣ Docker Build Context Error (.git Folder)
+- Issue: Docker build failed while trying to add .git directory to build context.
+- Root Cause: Missing .dockerignore file.
+- Learning:
+   - Always exclude unnecessary files using .dockerignore
+   - Reduces build size and prevents permission issues
+
+### 4️⃣  Downstream Stages Skipped (Trivy & Deploy)
+- Issue: Trivy scan and deployment stages were skipped automatically.
+- Root Cause: Jenkins declarative pipeline stops downstream stages after failures.
+- Learning:
+   - CI/CD pipelines are sequential
+   - One failing stage can block deployment
+
+### Key Takeaway
+This project exposed me to real-world DevOps and DevSecOps challenges such as tool compatibility, Jenkins plugin behavior, Docker permissions, and external security service limitations. Debugging these issues strengthened my understanding of how production CI/CD pipelines are designed and maintained.
+
+---
+
 ## Learning Outcomes
 
 * Practical CI/CD pipeline creation
