@@ -83,6 +83,11 @@ node-todo-cicd/
 * Deploys the application using Docker Compose
 
 ![Jenkins Pipeline](screenshots/jenkins-pipeline.png)
+
+![SonarQube](screenshots/sonarqube-dashboard.png)
+
+![Node Todo App](screenshots/app-running.png)
+
 ---
 
 ## Jenkins Pipeline
