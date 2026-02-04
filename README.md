@@ -19,7 +19,7 @@ The pipeline covers:
 
 ---
 
-## 🧰 Tools & Technologies Used
+## Tools & Technologies Used
 
 | Category         | Tools                          |
 | ---------------- | ------------------------------ |
