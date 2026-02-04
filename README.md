@@ -82,6 +82,7 @@ node-todo-cicd/
 
 * Deploys the application using Docker Compose
 
+![Jenkins Pipeline](screenshots/jenkins-pipeline.png)
 ---
 
 ## Jenkins Pipeline
